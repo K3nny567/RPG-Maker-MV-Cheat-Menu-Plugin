@@ -14,7 +14,8 @@ Clicking is done with left click and clickable elements will be highlighted red 
 Available Cheats Are
 --------------------
 
-* God Mode for any Actor (infinite hp and mp, skills shouldn't cost anything)
+* God Mode for Party Members (infinite hp and mp, skills shouldn't cost anything)
+  * Split into 4 cheats (infinite hp, mp and tp, skills shouldn't cost anything)
 * Set Enemy/Party HP to 0 hp or 1 hp, Party Full Recover (HP, MP, Status)
 * Toggle No Clip
 * Edit Exp
@@ -31,7 +32,7 @@ Available Cheats Are
   * With this you can edit game Variables and Switches (at your own risk) in the $gameVariables and $gameSwitches, as well as other advanced stuff
 * Open Switch/Variable Debug Menu from playtest Mode with F9
   * Better/easier method for editing the Switches and Variables than using the console, slower if you want to edit variables by large amounts
- 
+
 Downloads
 ---------
 
@@ -41,7 +42,6 @@ Download: [GitHub](https://github.com/emerladCoder/RPG-Maker-MV-Cheat-Menu-Plugi
 
 I've tested this to work with Cursed Armor and 魔王イリスの逆襲[RJ176175] (both are NSFW)
 
- 
 Install
 -------
 
@@ -51,13 +51,13 @@ Install
 * Patch your www/js/plugins.js  
   * Backup your www/js/plugins.js file
   * Patch
-      * Run MVPluginPatcher.exe  
+    * Run MVPluginPatcher.exe  
         or
-      * Manually Add the following to your plugins.js file, ensure you follow proper JavaScript formating for the $plugins array and include a , at end of the line before where you add this (recommended to add the bottom of plugins.js file)
-        * {"name":"Cheat_Menu","status":true,"description":"","parameters":{}}
- * Delete MVPluginPatcher.exe and plugins_patch.txt
+    * Manually Add the following to your plugins.js file, ensure you follow proper JavaScript formating for the $plugins array and include a , at end of the line before where you add this (recommended to add the bottom of plugins.js file)
+      * {"name":"Cheat_Menu","status":true,"description":"","parameters":{}}
+* Delete MVPluginPatcher.exe and plugins_patch.txt
 
-If the www/js/plugins.js is read only, remove that in the properties or the patch with fail. 
+If the www/js/plugins.js is read only, remove that in the properties or the patch with fail.
 
 Some games might have have altered the plugin loading mechanism (for example using a single composite plugin to save space). In this case you should open the GameFolder/www/js/main.js and insert the code as shown below in order to get any extra plugins to load.
 
@@ -78,7 +78,7 @@ window.onload = function() {
 };
 
 ```
- 
+
 Uninstall
 ---------
 
@@ -90,6 +90,7 @@ Uninstall
 
 Other RPG Maker MV Links
 ----------------
+
 Original ULMF thread for this plugin: [thread](http://www.ulmf.org/bbs/showthread.php?t=28982)
 
 I might also suggest Libellule's text hook for untranslated games: [thread](http://www.ulmf.org/bbs/showthread.php?t=29359)  

@@ -1,4 +1,4 @@
-#cheat_menu{
+#cheat_menu {
 	position: absolute;
 	width: 280px;
 	height: 100px;
@@ -10,7 +10,7 @@
 	padding: 10px;
 }
 
-#cheat_menu_text{
+#cheat_menu_text {
 	position: absolute;
 	width: 300px;
 	z-index: 1001;
@@ -20,7 +20,7 @@
 	text-align: center;
 	padding: 10px;
 
-	border-spacing: 0; 
+	border-spacing: 0;
 }
 
 .scroll_selector_row {

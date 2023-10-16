@@ -78,10 +78,10 @@ Cheat_Menu.god_mode_hp = function (actor) {
 	if (actor instanceof Game_Actor && !(actor.god_mode_hp)) {
 		actor.god_mode_hp = true;
 
-		actor.gainHP_bkup = actor.gainHp;
+		actor.gainHp_bkup = actor.gainHp;
 		actor.gainHp = function (value) {
 			value = this.mhp;
-			this.gainHP_bkup(value);
+			this.gainHp_bkup(value);
 		};
 
 		actor.setHp_bkup = actor.setHp;
@@ -153,7 +153,7 @@ Cheat_Menu.god_mode_hp_off = function (actor) {
 	if (actor instanceof Game_Actor && actor.god_mode_hp) {
 		actor.god_mode_hp = false;
 
-		actor.gainHp = actor.gainHP_bkup;
+		actor.gainHp = actor.gainHp_bkup;
 		actor.setHp = actor.setHp_bkup;
 
 		clearInterval(actor.god_mode_hp_interval);
@@ -823,11 +823,11 @@ Cheat_Menu.party_hp_cheat_6 = function () {
 // append the party hp cheats
 Cheat_Menu.append_hp_cheats = function (key1, key2, key3, key4, key5, key6) {
 	Cheat_Menu.append_title("Alive");
-	Cheat_Menu.append_cheat("Party HP to 100", "Activate", key1, Cheat_Menu.party_hp_cheat_1);
+	Cheat_Menu.append_cheat("Party HP to 0", "Activate", key1, Cheat_Menu.party_hp_cheat_1);
 	Cheat_Menu.append_cheat("Party HP to 1", "Activate", key2, Cheat_Menu.party_hp_cheat_2);
 	Cheat_Menu.append_cheat("Party Full HP", "Activate", key3, Cheat_Menu.party_hp_cheat_3);
 	Cheat_Menu.append_title("All");
-	Cheat_Menu.append_cheat("Party HP to 100", "Activate", key4, Cheat_Menu.party_hp_cheat_1);
+	Cheat_Menu.append_cheat("Party HP to 0", "Activate", key4, Cheat_Menu.party_hp_cheat_1);
 	Cheat_Menu.append_cheat("Party HP to 1", "Activate", key5, Cheat_Menu.party_hp_cheat_2);
 	Cheat_Menu.append_cheat("Party Full HP", "Activate", key6, Cheat_Menu.party_hp_cheat_3);
 };

@@ -80,10 +80,10 @@ Cheat_Menu.god_mode_hp = function (actor) {
 	if (actor instanceof Game_Actor && !(actor.god_mode_hp)) {
 		actor.god_mode_hp = true;
 
-		actor.gainHP_bkup = actor.gainHp;
+		actor.gainHp_bkup = actor.gainHp;
 		actor.gainHp = function (value) {
 			value = this.mhp;
-			this.gainHP_bkup(value);
+			this.gainHp_bkup(value);
 		};
 
 		actor.setHp_bkup = actor.setHp;
@@ -155,7 +155,7 @@ Cheat_Menu.god_mode_hp_off = function (actor) {
 	if (actor instanceof Game_Actor && actor.god_mode_hp) {
 		actor.god_mode_hp = false;
 
-		actor.gainHp = actor.gainHP_bkup;
+		actor.gainHp = actor.gainHp_bkup;
 		actor.setHp = actor.setHp_bkup;
 
 		clearInterval(actor.god_mode_hp_interval);

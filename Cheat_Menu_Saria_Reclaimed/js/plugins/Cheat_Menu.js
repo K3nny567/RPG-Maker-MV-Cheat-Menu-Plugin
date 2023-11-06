@@ -6,7 +6,7 @@
 // Actor selectors changed to party only. Because some games have too many actors to
 // scroll through.
 /////////////////////////////////////////////////
-// God mode no longer does HP and MP (this mimics the old Godmode from previous game versions)
+// God mode split into 4 cheats (Infinite HP, Infinite MP, Infinite TP, No Skill Cost)
 
 /////////////////////////////////////////////////
 // Cheat Menu Plugin Class

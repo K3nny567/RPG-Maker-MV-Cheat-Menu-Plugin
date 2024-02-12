@@ -4,7 +4,7 @@
 // Actor selectors changed to party only. Because some games have too many actors to
 // scroll through.
 /////////////////////////////////////////////////
-// God mode split into 4 cheats (Infinite HP, Infinite MP, Infinite TP, No Skill Cost)
+// God mode split into 3 cheats (Infinite HP, Infinite MP, Infinite TP)
 
 /////////////////////////////////////////////////
 // Cheat Menu Plugin Class
@@ -78,18 +78,6 @@ Cheat_Menu.god_mode_hp = function (actor) {
 	if (actor instanceof Game_Actor && !(actor.god_mode_hp)) {
 		actor.god_mode_hp = true;
 
-		actor.gainHp_bkup = actor.gainHp;
-		actor.gainHp = function (value) {
-			value = this.mhp;
-			this.gainHp_bkup(value);
-		};
-
-		actor.setHp_bkup = actor.setHp;
-		actor.setHp = function (hp) {
-			hp = this.mhp;
-			this.setHp_bkup(hp);
-		};
-
 		actor.god_mode_hp_interval = setInterval(function () {
 			actor.gainHp(actor.mhp);
 		}, 100);
@@ -98,18 +86,6 @@ Cheat_Menu.god_mode_hp = function (actor) {
 Cheat_Menu.god_mode_mp = function (actor) {
 	if (actor instanceof Game_Actor && !(actor.god_mode_mp)) {
 		actor.god_mode_mp = true;
-
-		actor.gainMp_bkup = actor.gainMp;
-		actor.gainMp = function (value) {
-			value = this.mmp;
-			this.gainMp_bkup(value);
-		};
-
-		actor.setMp_bkup = actor.setMp;
-		actor.setMp = function (mp) {
-			mp = this.mmp;
-			this.setMp_bkup(mp);
-		};
 
 		actor.god_mode_mp_interval = setInterval(function () {
 			actor.gainMp(actor.mmp);
@@ -120,31 +96,9 @@ Cheat_Menu.god_mode_tp = function (actor) {
 	if (actor instanceof Game_Actor && !(actor.god_mode_tp)) {
 		actor.god_mode_tp = true;
 
-		actor.gainTp_bkup = actor.gainTp;
-		actor.gainTp = function (value) {
-			value = this.maxTp();
-			this.gainTp_bkup(value);
-		};
-
-		actor.setTp_bkup = actor.setTp;
-		actor.setTp = function (tp) {
-			tp = this.maxTp();
-			this.setTp_bkup(tp);
-		};
-
 		actor.god_mode_tp_interval = setInterval(function () {
 			actor.gainTp(actor.maxTp());
 		}, 100);
-	}
-};
-Cheat_Menu.god_mode_skill = function (actor) {
-	if (actor instanceof Game_Actor && !(actor.god_mode_skill)) {
-		actor.god_mode_skill = true;
-
-		actor.paySkillCost_bkup = actor.paySkillCost;
-		actor.paySkillCost = function (skill) {
-			// do nothing
-		};
 	}
 };
 
@@ -153,18 +107,12 @@ Cheat_Menu.god_mode_hp_off = function (actor) {
 	if (actor instanceof Game_Actor && actor.god_mode_hp) {
 		actor.god_mode_hp = false;
 
-		actor.gainHp = actor.gainHp_bkup;
-		actor.setHp = actor.setHp_bkup;
-
 		clearInterval(actor.god_mode_hp_interval);
 	}
 };
 Cheat_Menu.god_mode_mp_off = function (actor) {
 	if (actor instanceof Game_Actor && actor.god_mode_mp) {
 		actor.god_mode_mp = false;
-
-		actor.gainMp = actor.gainMp_bkup;
-		actor.setMp = actor.setMp_bkup;
 
 		clearInterval(actor.god_mode_mp_interval);
 	}
@@ -173,17 +121,7 @@ Cheat_Menu.god_mode_tp_off = function (actor) {
 	if (actor instanceof Game_Actor && actor.god_mode_tp) {
 		actor.god_mode_tp = false;
 
-		actor.gainTp = actor.gainTp_bkup;
-		actor.setTp = actor.setTp_bkup;
-
 		clearInterval(actor.god_mode_tp_interval);
-	}
-};
-Cheat_Menu.god_mode_skill_off = function (actor) {
-	if (actor instanceof Game_Actor && actor.god_mode_skill) {
-		actor.god_mode_skill = false;
-
-		actor.paySkillCost = actor.paySkillCost_bkup;
 	}
 };
 
@@ -689,19 +627,6 @@ Cheat_Menu.god_mode_tp_toggle = function (event) {
 		Cheat_Menu.update_menu();
 	}
 };
-Cheat_Menu.god_mode_skill_toggle = function (event) {
-	if ($gameParty.allMembers()[Cheat_Menu.cheat_selected_actor]) {
-		if (!($gameParty.allMembers()[Cheat_Menu.cheat_selected_actor].god_mode_skill)) {
-			Cheat_Menu.god_mode_skill($gameParty.allMembers()[Cheat_Menu.cheat_selected_actor]);
-			SoundManager.playSystemSound(1);
-		}
-		else {
-			Cheat_Menu.god_mode_skill_off($gameParty.allMembers()[Cheat_Menu.cheat_selected_actor]);
-			SoundManager.playSystemSound(2);
-		}
-		Cheat_Menu.update_menu();
-	}
-};
 
 // Append the god_mode cheat to the menu
 Cheat_Menu.append_godmode_hp_status = function () {
@@ -736,17 +661,6 @@ Cheat_Menu.append_godmode_tp_status = function () {
 	}
 
 	Cheat_Menu.append_cheat("Infinite TP:", status_text, 8, Cheat_Menu.god_mode_tp_toggle);
-};
-Cheat_Menu.append_godmode_skill_status = function () {
-	var status_text;
-	if ($gameParty.allMembers()[Cheat_Menu.cheat_selected_actor] && $gameParty.allMembers()[Cheat_Menu.cheat_selected_actor].god_mode_skill) {
-		status_text = "<font color='#00ff00'>on</font>";
-	}
-	else {
-		status_text = "<font color='#ff0000'>off</font>";
-	}
-
-	Cheat_Menu.append_cheat("No Skill Cost:", status_text, 9, Cheat_Menu.god_mode_skill_toggle);
 };
 
 // handler for the enemy hp to 0 cheat alive only
@@ -1714,7 +1628,6 @@ Cheat_Menu.menus.splice(0, 0, function () {
 	Cheat_Menu.append_godmode_hp_status();
 	Cheat_Menu.append_godmode_mp_status();
 	Cheat_Menu.append_godmode_tp_status();
-	Cheat_Menu.append_godmode_skill_status();
 });
 
 
@@ -1789,7 +1702,6 @@ window.addEventListener("keydown", function (event) {
 						$gameParty.allMembers()[i].god_mode_hp = false;
 						$gameParty.allMembers()[i].god_mode_mp = false;
 						$gameParty.allMembers()[i].god_mode_tp = false;
-						$gameParty.allMembers()[i].god_mode_skill = false;
 						if ($gameParty.allMembers()[i].god_mode_hp_interval) {
 							clearInterval($gameParty.allMembers()[i].god_mode_hp_interval);
 						}
